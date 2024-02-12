@@ -4,9 +4,9 @@
 - [ ] Make a button
 - [ ] Make a play button  
 - [ ] Make a pause button
-- [ ] Make forward button 
-- []<make rewind>
-  -[ ] done with the button for the music player 
+- [ ] Make the forward button 
+- [ ] make rewind
+- [ ] done with the button for the music player 
 - [ ] < colores that are going to be used for music player>
 - [ ] < color blue dianne>
 - [ ] < color 
