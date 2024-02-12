@@ -6,5 +6,8 @@
 - [ ]<make pause> 
 - [ ]<Make forward>
 - []<make rewind>
-- [ ]< done to-do list for the button /*/>
-- [ ] < colores that are going to be used for music player>  
+- [ ]< to-do list for the button is done //>
+- [ ] < colores that are going to be used for music player>
+- [ ] < color blue dianne>
+- [ ] < color 
+
