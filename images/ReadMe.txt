@@ -1,0 +1,1 @@
+readme file for music player that im going to make.
