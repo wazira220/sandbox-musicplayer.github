@@ -1,8 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="music-player">
+        <h1>Music Player</h1>
+
+        <!-- Audio -->
+        <audio id="audio">
+            <source src="" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+
+        <!-- Album Photo -->
+        <div class="album-art">
+            <img id="album-photo" src="images/def.jpg" alt="Album Photo">
+        </div>
+
+        <!-- Ribbon and Track Name -->
+        <div id="ribbon">Now Playing</div>
+        <div id="track-name">Track Name Here</div>
+
+        <!-- Time Dispaly -->
+        <div id="time-display">
+            <span id="current-time">0:00</span> / <span id="total-duration">0:00</span>
+        </div>
+
+        <!-- Track Slider -->
+        <div id="controls">
+            <input type="range" id="track-slider" min="0" value="0">
+        </div>
+
+        <!-- Buttons -->
+        <div id="controls">
+            <button id="prev-button">Previous</button>
+            <button id="play-pause" class="hover-border">&#9658</button>
+            <button id="next-button">Next</button>
+        </div>
+
+        <!-- Volume Slider -->
+        <div id="controls">
+            <span>🔉</span>
+            <input type="range" id="volume" min="0" max="1" step="0.1" value="1">
+            <span>🔊</span>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+
+body {
+    background: url('images/jonny-gios-RQQRZ0G296E-unsplash.jpg') center/cover no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Lato', sans-serif;
+
+}
 
 
-   <!DOCTYPE html>
-   <html lang="en"
-    <head>
-      <meta charset="UTF-8">
-<meta name="viewport
-      
+h1 {
+    font-size: 24px;
+    color: #09323f;
+}
+
+
+/* Music Player */
+#music-player {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s;
+}
+
+#music-player:hover {
+    transform: scale(1.05);
+}
+
+
+/* Album Photo */
+.album-art {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    margin: 0 auto;
+}
+
+#album-photo {
+    width: 100%;
+    height: 100%;
+    border: 4px solid transparent;
+    border-radius: 50%;
+    animation: borderGlow 2s infinite;
+}
+
+@keyframes borderGlow {
+    0% {
+        border-color: #FF5722;  /* Initial border color */
+        box-shadow: 0 0 10px #FF5722;  /* Initial box shadow color */
+    }
+    50% {
+        border-color: #FFC107;  /* Middle border color */
+        box-shadow: 0 0 20px #FFC107;  /* Middle box shadow color */
+    }
+    100% {
+        border-color: #FF5722;  /* Final border color */
+        box-shadow: 0 0 10px #FF5722;  /* Final box shadow color */
+    }
+}
+
+
+/* Controls */
+#controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+
+/* Button */
+button {
+    background-color: #0db16c;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: border 0.3s;
+}
+
+button:hover {
+    border: 2px solid #0db16c;
+}
+
+
+/* Track Name */
+#track-name {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+
+/* Track Time */
+#current-time, #total-duration {
+    font-size: 14px;
+    color: #fff;
+    margin: 0 10px;
+}
+
+#current-time::before {
+    content: "Current Time: ";
+}
+
+#total-duration::before {
+    content: "Total Duration: ";
+}
+
+
+/* Input */
+input[type="range"] {
+    width: 100%;
+    height: 10px;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.3);
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+}
+
+input[type="range"]:hover {
+    opacity: 1;
+}
+
+
+/* Ribbon Design */
+#ribbon {
+    position: relative;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #ff6347;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 10px;
+    display: none;
+    margin-top: 15px;
+}
+
+#ribbon.active {
+    animation: ribbon-fade-in 2s linear;
+}
+
+@keyframes ribbon-fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
+/* Border Animation with cool effects */
+#music-player {
+    border: 5px solid transparent;
+    animation: borderAnimation 5s infinite linear;
+}
+
+@keyframes borderAnimation {
+    0% {
+        border-top: 5px solid #FF416C;
+        border-right: 5px solid #FF4B2B;
+        border-bottom: 5px solid #FF7F12;
+        border-left: 5px solid #FFD200;
+    }
+    25% {
+        border-top: 5px solid #FFD200;
+        border-right: 5px solid #FF416C;
+        border-bottom: 5px solid #FF4B2B;
+        border-left: 5px solid #FF7F12;
+    }
+    50% {
+        border-top: 5px solid #FF7F12;
+        border-right: 5px solid #FFD200;
+        border-bottom: 5px solid #FF416C;
+        border-left: 5px solid #FF4B2B;
+    }
+    75% {
+        border-top: 5px solid #FF4B2B;
+        border-right: 5px solid #FF7F12;
+        border-bottom: 5px solid #FFD200;
+        border-left: 5px solid #FF416C;
+    }
+    100% {
+        border-top: 5px solid #FF416C;
+        border-right: 5px solid #FF4B2B;
+        border-bottom: 5px solid #FF7F12;
+        border-left: 5px solid #FFD200;
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  const audio = document.getElementById("audio");
+  const playPauseButton = document.getElementById("play-pause");
+  const prevButton = document.getElementById("prev-button");
+  const nextButton = document.getElementById("next-button");
+  const volumeControl = document.getElementById("volume");
+  const trackSlider = document.getElementById("track-slider");
+  const currentTimeDisplay = document.getElementById("current-time");
+  const totalDurationDisplay = document.getElementById("total-duration");
+  const ribbon = document.getElementById("ribbon");
+  const trackNameDisplay = document.getElementById("track-name");
+  const albumPhoto = document.getElementById("album-photo");
+
+
+  let isPlaying = false;
+  let currentTrack = 0;
+  let audioPosition = 0;
+
+
+  // Array of Track URLs
+  const trackList = [
+    "audio/Catch Me If I Fall - NEFFEX.mp3",
+    "audio/Losing My Mind - NEFFEX.mp3",
+    "audio/The Mumbai Beat - Hanu Dixit.mp3",
+    "audio/Winning - NEFFEX.mp3",
+    "audio/You Will Never See Me Coming - NEFFEX.mp3",
+    // Add more tracks as needed
+  ];
+
+
+  // Array of Album Photos
+  const albumPhotos = [
+    "images/adam-birkett-vISNAATFXlE-unsplash.jpg",
+    "images/claus-grunstaudl-dKeB0-M9iiA-unsplash.jpg",
+    "images/icons8-team-7LNatQYMzm4-unsplash.jpg",
+    "images/james-owen-MuIvHRJbjA8-unsplash.jpg",
+    "images/kobu-agency-3hWg9QKl5k8-unsplash.jpg",
+    // Add more corresponding Album Photos
+  ];
+
+
+  // Function to toggle between Play and Pause
+  function togglePlayPause() {
+    if (!isPlaying) {
+      if (audioPosition === 0) {
+        // Start from the beginning of the track
+        audio.src = trackList[currentTrack];
+      }
+      audio.load();
+      audio.currentTime = audioPosition; // Set the audio position
+      audio
+        .play()
+        .then(() => {
+          playPauseButton.textContent = "❚❚";
+          isPlaying = true;
+          updateTrackName(currentTrack);
+
+          ribbon.style.display = "block"; // Show the ribbon
+          ribbon.classList.add("active");
+        })
+        .catch((error) => {
+          console.error("Audio Playback Error: " + error.message);
+        });
+    } else {
+      audioPosition = audio.currentTime; // Store the current audio position
+      audio.pause();
+      playPauseButton.textContent = "►";
+      ribbon.style.display = "none"; // Hide the ribbon
+      isPlaying = false;
+    }
+  }
+
+  playPauseButton.addEventListener("click", togglePlayPause);
+
+
+  // Function to play the next track
+  nextButton.addEventListener("click", function () {
+    if (currentTrack < trackList.length - 1) {
+      currentTrack++;
+    } else {
+      currentTrack = 0;
+    }
+    playTrack(currentTrack);
+  });
+
+
+  // Function to play the previous track
+  prevButton.addEventListener("click", function () {
+    if (currentTrack > 0) {
+      currentTrack--;
+    } else {
+      currentTrack = trackList.length - 1;
+    }
+    playTrack(currentTrack);
+  });
+
+
+  // Function to play a specific track
+  function playTrack(trackIndex) {
+    audio.src = trackList[trackIndex];
+    audio.load();
+    audio.play();
+    playPauseButton.textContent = "❚❚";
+    isPlaying = true;
+    updateTrackName(trackIndex); // Updating the track name
+  }
+
+
+  // Function to update the track name
+  function updateTrackName(trackIndex) {
+    const trackName = trackList[trackIndex];
+    const cleanedTrackName = trackName.replace("audio/", "");
+    trackNameDisplay.textContent = cleanedTrackName;
+    albumPhoto.src = albumPhotos[trackIndex];
+  }
+
+  volumeControl.addEventListener("input", function () {
+    audio.volume = volumeControl.value;
+  });
+
+
+  // Update the audio time displays
+  audio.addEventListener("timeupdate", function () {
+    const currentTime = formatTime(audio.currentTime);
+    const totalDuration = formatTime(audio.duration);
+    currentTimeDisplay.textContent = currentTime;
+    totalDurationDisplay.textContent = totalDuration;
+
+    // Update the track slider as the audio plays
+    const position = (audio.currentTime / audio.duration) * 100;
+    trackSlider.value = position;
+  });
+
+
+  // Seek to a position when the user interacts with the track slider
+  trackSlider.addEventListener("input", function () {
+    const newPosition = (trackSlider.value / 100) * audio.duration;
+    audio.currentTime = newPosition;
+  });
+
+
+  // Handle track ending and play the next track
+  audio.addEventListener("ended", function () {
+    if (currentTrack < trackList.length - 1) {
+      currentTrack++;
+    } else {
+      currentTrack = 0;
+    }
+    playTrack(currentTrack);
+  });
+
+  function formatTime(seconds) {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = Math.floor(seconds % 60);
+    return `${minutes}:${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}`;
+  }
+});
